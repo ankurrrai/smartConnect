@@ -1,10 +1,13 @@
 const express =require('express');
 const router=express.Router();
-const homeController=require('../controllers/home_controller')
 
+// when we need to use controller-1
+const homeController=require('../controllers/home_controller');
 
-console.log('Router Loaded');
+// to use controller function inside the routes -2
 router.get('/',homeController.home);
-router.get('/practice',homeController.practice)
+
+// when we need to use routes js file
+router.use('/user',require('./users'));
 
 module.exports=router
