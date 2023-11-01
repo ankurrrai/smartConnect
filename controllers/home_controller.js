@@ -1,3 +1,7 @@
 module.exports.home=function(req,res){
-    return res.send("<h1>Hey!There</h1>")
+    console.log(req.cookies)
+    res.cookie('user_pass',10)
+    return res.render('home.ejs',{
+        title:'Home'
+    })
 };
