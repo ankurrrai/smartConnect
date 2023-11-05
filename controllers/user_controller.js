@@ -2,8 +2,6 @@ const User=require('../models/user')
 
 module.exports.userHome=function(req,res){
     
-    console.log(req.cookies)
-    res.cookie('user_pass',10)
     return res.render('userhome.ejs',{
         title:'User home'
     })
@@ -11,9 +9,27 @@ module.exports.userHome=function(req,res){
 
 // Action to render the userprofile page
 module.exports.userProfile=function(req,res){
-    return res.render('userprofile.ejs',{
-        title:"Profile"
-    })
+    if (req.cookies.user_id){
+        User.findOne({_id:req.cookies.user_id}).then(function(user){
+            if (user){
+                return res.render('userprofile.ejs',{
+                    title:"Profile",
+                    user:user
+                });
+            } else {
+                return res.redirect('/users/sign-in');
+            }
+            
+            
+        }).catch(function(err) {
+             console.log(`error while finding user_id from cookies : ${err}`)
+             return res.redirect('/users/sign-in')
+            })
+
+    } else {
+        return res.redirect('/users/sign-in');
+    }
+    
 };
 
 //Action to reder the signup page
@@ -55,6 +71,30 @@ module.exports.create=function(req,res){
 
 // Action for create-seesion to existing user
 // sign in and create the session for users
-module.exports.createSession=function(){
-    // todo
-}
+module.exports.createSession=function(req,res){
+    // finding the email from db
+    User.findOne({email: req.body.email}).then(function(user){
+        
+        if(user) {
+            // checking the password
+            if (user.password == req.body.password) {
+                res.cookie('user_id',user._id);
+                return res.redirect('/users/profile');
+            } else {
+                console.log(`password is not correct. Kindly retype the password!`);
+                return res.redirect('back');
+            }
+
+        } else {
+            console.log(`This user is not available`);
+            return res.redirect('back');
+        }
+    }).catch(err => console.log(`Error while finding the user details during session creation :${err} `))
+};
+
+
+// Action to sign out from user profile
+module.exports.signout=function(req,res){
+    res.cookie('user_id',1);
+    return res.redirect('/users/sign-in')
+};
