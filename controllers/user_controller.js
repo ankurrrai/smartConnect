@@ -13,11 +13,17 @@ module.exports.userHome=function(req,res){
 module.exports.userProfile=function(req,res){
     return res.render('userprofile.ejs',{
         title:"Profile"
+
     })
 };
 
 //Action to reder the signup page
 module.exports.signUp=function(req,res){
+
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile')
+    }
+
     return res.render('user-sign-up.ejs',{
         title:'SignUp'
     })
@@ -25,6 +31,11 @@ module.exports.signUp=function(req,res){
 
 //Action to reder the signin page
 module.exports.signIn=function(req,res){
+
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile')
+    }
+
     return res.render('user-sign-in.ejs',{
         title:'SignIn'
     })
@@ -55,6 +66,16 @@ module.exports.create=function(req,res){
 
 // Action for create-seesion to existing user
 // sign in and create the session for users
-module.exports.createSession=function(){
-    // todo
+module.exports.createSession=function(req,res){
+    return res.redirect('/');
+}
+
+// action to signout
+module.exports.destroySession=function(req,res,next){
+    req.logout(function(err){ //Also have  doubt to clear on this
+        if(err){
+            return next(err);
+        }
+    }); //logout is passport function to remove the cookies
+    return res.redirect('/')
 }

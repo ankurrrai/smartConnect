@@ -1,6 +1,5 @@
 module.exports.home=function(req,res){
-    console.log(req.cookies)
-    res.cookie('user_pass',10)
+    // console.log(req.cookies)
     return res.render('home.ejs',{
         title:'Home'
     })

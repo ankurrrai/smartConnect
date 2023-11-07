@@ -1,7 +1,7 @@
 const express=require('express');
 const app=express();
 const port=8000;
-
+const session=require('express-session');
 // setup the url encoded
 app.use(express.urlencoded());
 
@@ -21,13 +21,49 @@ app.set('views','./views');
 const expressLayouts=require('express-ejs-layouts');
 app.use(expressLayouts);
 
-// extract styles and scripys frpm subpages to the layout
+
+// extract styles and scripts from subpages to the layout
 app.set('layout extractStyles',true);
 app.set('layout extractScripts',true);
 
+
+
+// setup the passport
+const passport=require('passport');
+const passportLocal=require('./config/passport-local-strategy');
+
+ 
+const MongoStore = require('connect-mongo');
+// const MongoStoredbConnection=require('connect-mongo');
+// const MongoStore=MongoStoredbConnection(session);
+
+
+app.use(session({
+    name:'smartConnect',
+    // todo change the secret before in production mode
+    secret:'Hvae to do this dynamic',
+    saveUninitialized:false,
+    resave:false,
+    cookie:{
+        maxAge:(1000*60*100),
+    },
+    store:MongoStore.create(    
+        {
+            mongoUrl:'mongodb://127.0.0.1:27017/smartConnect_development' //have to read the documentation
+        }
+    )
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(passport.setAuthenticatedUser);
+
+
+
+
 // use express router
 app.use('/',require('./routes/index'));
-
 
 // setup the db
 const db=require('./config/mongoose');
