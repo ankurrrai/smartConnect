@@ -1,4 +1,8 @@
-body{
-    background-color: black;
-    color: white;
-}
+body #title {
+  text-align: center; }
+
+body #user-details {
+  margin: 10px;
+  padding: 50px;
+  font-size: 1em;
+  font-weight: bold; }

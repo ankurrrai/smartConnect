@@ -1,1 +1,34 @@
-<h1>This is home page</h1>
+<h1>SmarConnect <%= title %> </h1>
+
+<% if(locals.user){%>
+
+    <div id="new-post">
+        <h4>Add Posts</h4>
+        <form action="/posts/create" id="create-post" method="post">
+            <textarea name="content" id="post-content" cols="30" rows="3" placeholder="Add Post..."></textarea>
+            <input type="submit" value="Add Post">
+        </form>
+    </div>
+
+    <%}
+%>
+
+
+
+<div id="all-post">
+    <% if(post.length>0){%>
+        <h4>All Posts</h4>
+        <%}
+    %>
+    
+    <% for (let i=0;i<post.length;i++) {%>
+
+            <div>
+                 <%= post[i].content %> <br>
+                 <small> <%= post[i].user.email %> </small><br><br>
+            </div>
+            
+
+        <%}
+    %>
+</div>

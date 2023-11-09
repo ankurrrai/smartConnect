@@ -29,7 +29,7 @@ passport.use(new LocalStaregy({
 
 // serializing the user to decide which key is to kept inn the cookies
 passport.serializeUser(function(user,done){
-    done(null,user.id);
+    return done(null,user.id);
 });
 
 // deserializing the user from the key in the cookies

@@ -1,5 +1,4 @@
-body{
-    margin: 0px;
-    padding: 10%;
-    /* text-align: center; */
-}
+body {
+  margin: 0px; }
+  body #main {
+    height: 100%; }

@@ -2,8 +2,13 @@ const User=require('../models/user')
 
 module.exports.userHome=function(req,res){
     
-    console.log(req.cookies)
-    res.cookie('user_pass',10)
+    // console.log(req.cookies)
+    // res.cookie('user_pass',10)
+
+    if (req.isAuthenticated()){ //isAuthenticated is passport function
+        return res.redirect('/users/profile')
+    };
+    
     return res.render('userhome.ejs',{
         title:'User home'
     })

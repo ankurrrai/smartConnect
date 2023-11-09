@@ -1,0 +1,21 @@
+#main-header {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  background-color: black;
+  padding: 10px; }
+  #main-header ul {
+    display: flex;
+    justify-content: end;
+    padding: 20px;
+    list-style-type: none;
+    margin: 0px; }
+    #main-header ul li {
+      margin: 10px; }
+      #main-header ul li a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        font-size: 1em; }
+        #main-header ul li a:hover {
+          color: blue; }

@@ -1,0 +1,33 @@
+#main-header{
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    background-color: black;
+    padding: 10px;
+    ul{
+        display: flex;
+        justify-content: end;
+        padding: 20px;
+        list-style-type: none;
+        margin: 0px;
+        
+        li{
+            
+            margin: 10px;
+            
+            a{
+                text-decoration: none;
+                color: white;
+                font-weight: bold;
+                font-size: 1em;
+
+                &:hover{
+                    color: blue;
+                    
+                }
+            }
+        }
+    }
+    
+    
+}

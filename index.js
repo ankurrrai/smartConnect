@@ -9,6 +9,16 @@ app.use(express.urlencoded());
 const cookieParser=require('cookie-parser');
 app.use(cookieParser());
 
+// set up the SAAS for styling
+const sassMiddleware=require('node-sass-middleware');
+app.use(sassMiddleware({
+    src:'./assests/scss',
+    dest:'./assests/css',
+    debug:true,
+    outputStyle:'extended', //extended
+    prefix:'/css'
+}));
+
 // setup the static file
 app.use(express.static('./assests'))
 
