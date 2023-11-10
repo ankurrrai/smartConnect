@@ -22,9 +22,10 @@
             <%}
         %>
         <ul>
-            <% for (let i=0;i<post.length;i++) {%>
-                
-                <%- include('_post') -%>
+            <% for (p of post) {%>
+                <li>
+                    <%- include('_post'); %>
+                </li>
             <%}
             %>
         </ul>
@@ -32,3 +33,13 @@
     </div>
 </section>
 
+<section>
+    <ul>
+        <% for (u of  all_users) {%>
+            <li>
+                <a href="/users/profile/?id=<%= u.id %>"><%= u.name %></a>
+            </li>
+        <%} %>
+        
+    </ul>
+</section>

@@ -16,10 +16,13 @@ module.exports.userHome=function(req,res){
 
 // Action to render the userprofile page
 module.exports.userProfile=function(req,res){
-    return res.render('userprofile.ejs',{
-        title:"Profile"
-
+    User.findById(req.query.id).exec().then(function(currUser){
+        return res.render('userprofile.ejs',{
+            title:"Profile",
+            currUser:currUser
+        })
     })
+    
 };
 
 //Action to reder the signup page

@@ -1,5 +1,5 @@
 <li>
-    <% if(locals.user && (locals.user.id == post[i].user.id || locals.user.id == cmnt.user.id)){%>
+    <% if(locals.user && (locals.user.id == p.user.id || locals.user.id == cmnt.user.id)){%>
                     
         <div class="comment-delete-button">
             <a href="/comment/destroy/?id=<%= cmnt.id %>">Del Comment</a>
