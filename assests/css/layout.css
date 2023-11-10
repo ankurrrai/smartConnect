@@ -1,4 +1,4 @@
 body {
   margin: 0px; }
   body #main {
-    height: 100%; }
+    min-height: 100%; }

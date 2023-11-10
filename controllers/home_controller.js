@@ -4,7 +4,16 @@ const { populate } = require('../models/user');
 
 module.exports.home=function(req,res){
 
-    Post.find({}).populate('user').exec().then(function(post){
+    Post.find({})
+    .populate('user')
+    .populate({
+        path:'comment' ,
+        populate:{
+            path:'user'
+        }
+    })
+    .exec().then(function(post){
+        
         return res.render('home.ejs',{
             title:'Home',
             post:post
