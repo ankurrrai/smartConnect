@@ -6,6 +6,7 @@ const userController=require('../controllers/user_controller');
 
 router.get('/',userController.userHome);
 router.get('/profile',passport.checkAuthentication,userController.userProfile);
+router.post('/update',passport.checkAuthentication,userController.update);
 
 router.get('/sign-up',userController.signUp);
 router.get('/sign-in',userController.signIn);

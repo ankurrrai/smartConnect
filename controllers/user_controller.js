@@ -25,6 +25,21 @@ module.exports.userProfile=function(req,res){
     
 };
 
+// Action to update the user details
+module.exports.update=function(req,res){
+    console.log(req.query.id)
+    if (req.user[0].id==req.query.id){
+        User.findByIdAndUpdate(req.query.id,req.body).then(function(user){
+
+            return res.redirect('back');
+        }).catch(function(err){
+            return res.status(401).send('Not found')
+        })
+    }else {
+        return res.status(401).send('Unauthorized')
+    }
+}
+
 //Action to reder the signup page
 module.exports.signUp=function(req,res){
 

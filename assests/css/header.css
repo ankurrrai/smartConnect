@@ -4,6 +4,13 @@
   color: white;
   background-color: black;
   padding: 10px; }
+  #main-header a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1em; }
+    #main-header a:hover {
+      color: blue; }
   #main-header ul {
     display: flex;
     justify-content: end;

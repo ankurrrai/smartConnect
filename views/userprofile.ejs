@@ -5,14 +5,23 @@
 </h1>
 
 
+<% if(locals.user.id==currUser.id){%>
+        <form action="/users/update/?id=<%= currUser.id %>" method="post">
+            <input type="text" name="name" id="name" placeholder="Your Name" value="<%= currUser.name %>" required>
+            <input type="email" name="email" id="email" placeholder="Your Email" value="<%= currUser.email %>" required>
+            <input type="submit" value="Update">
+        </form>
+    <%} else {%>
+        <div id="user-details">
+            <div>
+                <%= currUser.name %>
+            </div>
+            <div>
+                <%= currUser.email %>
+            </div>
+        </div>
+        
+    <%} %>
 
 
-<div id="user-details">
-    <div>
-        <%= currUser.name %>
-    </div>
-    <div>
-        <%= currUser.email %>
-    </div>
-</div>
 

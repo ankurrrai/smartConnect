@@ -1,45 +1,53 @@
-<h1>SmarConnect <%= title %> </h1>
+<link rel="stylesheet" href="/css/home.css">
 
-<section>
-    <% if(locals.user){%>
+<div id="home-container">
+    <section id="useful-links">
+        <h4>Use ful Links</h4>
+    </section>
 
-        <div id="new-post">
-            <h4>Add Posts</h4>
-            <form action="/posts/create" id="create-post" method="post">
-                <textarea name="content" id="post-content" cols="30" rows="3" placeholder="Add Post..."></textarea>
-                <input type="submit" value="Add Post">
-            </form>
-        </div>
+    <section id="home-posts-container">
+        <% if(locals.user){%>
     
-        <%}
-    %>
-    
-    
-    
-    <div id="all-post">
-        <% if(post.length>0){%>
-            <h4>All Posts</h4>
+            <div id="new-post">
+                
+                <form action="/posts/create" id="create-post" method="post">
+                    <textarea name="content" id="post-content" cols="30" rows="3" placeholder="What's on your Mind, <%= locals.user.name %>?"></textarea>
+                    <input type="submit"  value="Add Post">
+                </form>
+
+            </div>
+        
             <%}
         %>
-        <ul>
-            <% for (p of post) {%>
-                <li>
-                    <%- include('_post'); %>
-                </li>
-            <%}
+        
+        
+        
+        <div id="all-post">
+            <% if(post.length>0){%>
+                <h4>All Posts</h4>
+                <%}
             %>
+            <ul>
+                <% for (p of post) {%>
+                    <li>
+                        <%- include('_post'); %>
+                    </li>
+                <%}
+                %>
+            </ul>
+            
+        </div>
+    </section>
+    
+    <section id="home-friends-container">
+        <h4>Friends</h4>
+        <ul>
+            <% for (u of  all_users) {%>
+                <li>
+                    <a href="/users/profile/?id=<%= u.id %>"><%= u.name %></a>
+                </li>
+            <%} %>
+            
         </ul>
-        
-    </div>
-</section>
-
-<section>
-    <ul>
-        <% for (u of  all_users) {%>
-            <li>
-                <a href="/users/profile/?id=<%= u.id %>"><%= u.name %></a>
-            </li>
-        <%} %>
-        
-    </ul>
-</section>
+    </section>
+</div>

@@ -1,0 +1,51 @@
+#home-container {
+  min-height: 100%;
+  display: flex;
+  padding: 20px; }
+  #home-container #useful-links {
+    width: 20%;
+    padding: 10px;
+    border-style: groove; }
+  #home-container #home-posts-container {
+    width: 60%;
+    padding: 10px; }
+    #home-container #home-posts-container #new-post {
+      width: 100%; }
+      #home-container #home-posts-container #new-post form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center; }
+      #home-container #home-posts-container #new-post form textarea {
+        width: 100%; }
+      #home-container #home-posts-container #new-post form input {
+        margin-top: 20px;
+        width: 80px;
+        height: 40px;
+        background-color: black;
+        color: white;
+        font-size: 1rem;
+        border: none; }
+    #home-container #home-posts-container #all-post {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 70%;
+      margin-left: 15%;
+      margin-right: 15%; }
+      #home-container #home-posts-container #all-post ul {
+        list-style-type: none;
+        margin: 0px;
+        padding: 0px; }
+      #home-container #home-posts-container #all-post .home-allPost {
+        width: 100%;
+        border-style: groove;
+        min-height: 400px;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 50px;
+        padding: 10px; }
+  #home-container #home-friends-container {
+    width: 20%;
+    padding: 10px;
+    border-style: groove; }

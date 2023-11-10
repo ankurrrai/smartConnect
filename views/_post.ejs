@@ -1,39 +1,48 @@
 
-    <div>
-        <% if(locals.user && locals.user.id == p.user.id){%>
+    <div class="home-allPost">
+        
+         <div class="home-allPost-content">
+            <div>
+                <small> <%= p.user.name %> <br></small>
+                <span>
+                    <%= p.content %>
+                </span>
+                
+            </div>
+            
+
+            <% if(locals.user){%>
+                <div class="post-comments">
+                    <form action="/comment/create" method="post">
+                        <input type="text" name="content" placeholder="Add Comment..." required>
+                        <input type="hidden" name="post" value="<%= p._id %>" readonly>
+                        <input type="submit" value="Add Comment">
+                    </form>
+                </div>
+                <%}
+            %>
+            
+            <div class="post-comments-list">
+                <ul>
+                    <% for(cmnt of p.comment) {%>
+                        <%- include('./_comment.ejs'); %>
+                    <%} %>
+    
+                </ul>
+                
+                
+            </div>
+
+         </div>
+
+         <% if(locals.user && locals.user.id == p.user.id){%>
             <div class="delete-button">
                 <a href="/posts/destroy/?id=<%= p.id %>">Del</a>
             </div>
             <%}
         %>
-         <p>
-            <%= p.content %> <br>
-            <small> <%= p.user.email %> </small>
-         </p>
 
-        
-
-         <% if(locals.user){%>
-            <div class="post-comments">
-                <form action="/comment/create" method="post">
-                    <input type="text" name="content" placeholder="Add Comment..." required>
-                    <input type="hidden" name="post" value="<%= p._id %>" readonly>
-                    <input type="submit" value="Add Comment">
-                </form>
-            </div>
-            <%}
-        %>
-        
-        <div class="post-comments-list">
-            <ul>
-                <% for(cmnt of p.comment) {%>
-                    <%- include('./_comment.ejs'); %>
-                <%} %>
-
-            </ul>
-            
-            
-        </div>
+         
 
     </div>
     
