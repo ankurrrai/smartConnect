@@ -15,36 +15,45 @@ module.exports.userHome=function(req,res){
 };
 
 // Action to render the userprofile page
-module.exports.userProfile=function(req,res){
-    User.findById(req.query.id).exec().then(function(currUser){
+module.exports.userProfile=async function(req,res){
+    try {
+        let currUser=await User.findById(req.query.id);
         return res.render('userprofile.ejs',{
             title:"Profile",
             currUser:currUser
-        })
-    })
+        });
+    } catch (err) {
+        console.log(`Error in user_controller -> userProfile`)
+        console.log(`Error Description ${err}`)
+        return res.status(401).send('Not Found')
+    }
+    
     
 };
 
 // Action to update the user details
-module.exports.update=function(req,res){
-    console.log(req.query.id)
-    if (req.user[0].id==req.query.id){
-        User.findByIdAndUpdate(req.query.id,req.body).then(function(user){
-
-            return res.redirect('back');
-        }).catch(function(err){
-            return res.status(401).send('Not found')
-        })
-    }else {
-        return res.status(401).send('Unauthorized')
+module.exports.update=async function(req,res){
+    try {
+        if (req.user[0].id==req.query.id){
+            let user=await User.findByIdAndUpdate(req.query.id,req.body)
+            return res.redirect('back')
+        }else{
+            return res.status(401).send('Unauthorized')
+        }
+        
+    } catch (err) {
+        console.log(`Error in user_controller -> update`)
+        console.log(`Error Description ${err}`)
+        return res.status(401).send('Not Found')
     }
+    
 }
 
 //Action to reder the signup page
 module.exports.signUp=function(req,res){
 
     if(req.isAuthenticated()){
-        return res.redirect('/users/profile')
+        return res.redirect('/')
     }
 
     return res.render('user-sign-up.ejs',{
@@ -55,8 +64,8 @@ module.exports.signUp=function(req,res){
 //Action to reder the signin page
 module.exports.signIn=function(req,res){
 
-    if(req.isAuthenticated()){
-        return res.redirect('/users/profile')
+    if(req.isAuthenticated()){  //Built in function
+        return res.redirect('/')
     }
 
     return res.render('user-sign-in.ejs',{
@@ -66,39 +75,52 @@ module.exports.signIn=function(req,res){
 
 
 // Action to create new user
-module.exports.create=function(req,res){
-    if (req.body.password != req.body.confirm_password){
-        console.log('Password is not same!')
-        return res.redirect('back');
-    };
+module.exports.create=async function(req,res){
 
-    User.findOne({email:req.body.email}).then(function(user){
-
-        if(!user) {
-            User.create(req.body).then(function(newUser){
-                console.log(`Signup is succesfull! ${newUser}`);
-                return res.redirect('/users/sign-in');
-            }).catch(err => console.log(`Erorr while create new user during signup : ${err}`))
-        } else{
-            console.log('This mail id is already taken!')
+    try {
+        if (req.body.password != req.body.confirm_password){
+            console.log('Password is not same!')
             return res.redirect('back');
         };
-    }).catch(err => console.log(`Error while finding the user while signup : ${err}`))
+    
+        let user=await User.findOne({email:req.body.email})
+        if (!user){
+            let newUser=await User.create(req.body);
+            req.flash('success','Successfully Sign Up, please login..');
+            
+        } else{
+            req.flash('success','This email is already in use, please login..');
+        }
+        
+        return res.redirect('/users/sign-in')
+    } catch (err) {
+        req.flash('error',err)
+        console.log(`Error in user_controller -> create`)
+        console.log(`Error Description ${err}`)
+        return res.redirect('back')   
+    }
+    
 
 };
 
 // Action for create-seesion to existing user
 // sign in and create the session for users
 module.exports.createSession=function(req,res){
+    req.flash('success','logged in successfully!')
     return res.redirect('/');
 }
 
 // action to signout
-module.exports.destroySession=function(req,res,next){
+module.exports.destroySession=async function(req,res,next){
+
+
     req.logout(function(err){ //Also have  doubt to clear on this
         if(err){
             return next(err);
         }
+        req.flash('success','Logged Out!')
+        return res.redirect('/')
     }); //logout is passport function to remove the cookies
-    return res.redirect('/')
+
+    
 }

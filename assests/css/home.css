@@ -40,7 +40,6 @@
       #home-container #home-posts-container #all-post .home-allPost {
         width: 100%;
         border-style: groove;
-        min-height: 400px;
         display: flex;
         justify-content: space-between;
         margin-bottom: 50px;

@@ -11,7 +11,7 @@
             <div id="new-post">
                 
                 <form action="/posts/create" id="create-post" method="post">
-                    <textarea name="content" id="post-content" cols="30" rows="3" placeholder="What's on your Mind, <%= locals.user.name %>?"></textarea>
+                    <textarea name="content" id="post-content" cols="30" rows="3" placeholder="What's on your Mind, <%= locals.user.name %>?" required></textarea>
                     <input type="submit"  value="Add Post">
                 </form>
 
@@ -27,11 +27,11 @@
                 <h4>All Posts</h4>
                 <%}
             %>
-            <ul>
+            <ul id="all-post-container">
                 <% for (p of post) {%>
-                    <li>
+                    
                         <%- include('_post'); %>
-                    </li>
+                    
                 <%}
                 %>
             </ul>
@@ -51,3 +51,5 @@
         </ul>
     </section>
 </div>
+
+<script src="/js/home_script.js"></script>

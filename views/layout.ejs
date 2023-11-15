@@ -3,6 +3,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
+    <!-- Noty js cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/layout.css">
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/footer.css">
@@ -12,7 +20,7 @@
 </head>
 <body>
     <%- include('_header'); %>
-    
+
     <div id="main">
         <%- body %>
     </div>
@@ -20,5 +28,31 @@
     <%- include('_footer'); %>
 
     <%- script %>
+
+    <!-- Noty js to enable notification -->
+    <% if (flash.success && flash.success.length){%>
+        <script>
+            new Noty({
+                theme:'relax',
+                text:'<%= flash.success %>',
+                type: 'success',
+                layout: 'topRight',
+                timeout:1500
+            }).show();
+        </script>
+    <%} %>
+
+    <% if (flash.error && flash.error.length){%>
+        <script>
+            new Noty({
+                theme:'relax',
+                text:'<%= flash.error %>',
+                type: 'error',
+                layout: 'topRight',
+                timeout:1500
+            }).show();
+        </script>
+    <%} %>
+
 </body>
 </html>

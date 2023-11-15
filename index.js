@@ -69,6 +69,11 @@ app.use(passport.session());
 
 app.use(passport.setAuthenticatedUser);
 
+// setup the connect-flash
+const flash=require('connect-flash');
+const cusstomMdwr=require('./config/customMiddleware');
+app.use(flash());
+app.use(cusstomMdwr.setFlash);
 
 
 
