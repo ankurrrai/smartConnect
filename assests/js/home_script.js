@@ -15,7 +15,7 @@
                     let newPost= newPostDOM(data.data.newPost)
                     $('#all-post>ul').prepend(newPost);
                     deletePost($(' .delete-post-button',newPost));
-                    createComment(data.data.newPost._id);
+                    createComment(data.data.newPost._id);// call the create comment to add comment by using ajax
                     newPostForm[0].reset();
                     NotyNotification('Post Published!','success');
                     

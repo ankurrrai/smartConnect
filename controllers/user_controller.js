@@ -1,5 +1,8 @@
 const User=require('../models/user')
 
+const fs=require('fs');
+const path=require('path');
+
 module.exports.userHome=function(req,res){
     
     // console.log(req.cookies)
@@ -35,8 +38,30 @@ module.exports.userProfile=async function(req,res){
 module.exports.update=async function(req,res){
     try {
         if (req.user[0].id==req.query.id){
-            let user=await User.findByIdAndUpdate(req.query.id,req.body)
-            return res.redirect('back')
+            // let user=await User.findByIdAndUpdate(req.query.id,req.body);
+            let user=await User.findById(req.query.id);
+            
+            // called statics function which we created in user model
+            // Multer used to fetch the profile picture
+            User.uploadedAvatar(req,res,function(err){
+                if (err){console.log('*****Multer Error :',err)};
+                user.name=req.body.name;
+                user.email=req.body.email;
+
+                // need to delete previous avatar if it is there
+                if (user.avatar && fs.existsSync(path.join(__dirname,'..',user.avatar))) {
+                    fs.unlinkSync(path.join(__dirname,'..',user.avatar));
+                }
+
+                if(req.file){
+                    // File Path which we are updating for profile picture
+                    user.avatar=User.avatarPath + '/' + req.file.filename;
+                }
+                user.save();
+                return res.redirect('back')
+
+            });
+            // return res.redirect('back')
         }else{
             return res.status(401).send('Unauthorized')
         }

@@ -1,14 +1,18 @@
 <link rel="stylesheet" href="/css/user_profile.css">
 
-<h1 id="title">
-    This is user <%= title %> page
-</h1>
+<% if (currUser.avatar){%>
+    <img src="<%= currUser.avatar %>" alt="<%= currUser.name %>" width="100">
+<%} else {%>
+    <img src="/uploads/users/avatars/dummy.jpg" alt="<%= currUser.name %>" width="100">
+<%} %>
+
 
 
 <% if(locals.user.id==currUser.id){%>
-        <form action="/users/update/?id=<%= currUser.id %>" method="post">
+        <form action="/users/update/?id=<%= currUser.id %>" enctype="multipart/form-data" method="post">
             <input type="text" name="name" id="name" placeholder="Your Name" value="<%= currUser.name %>" required>
             <input type="email" name="email" id="email" placeholder="Your Email" value="<%= currUser.email %>" required>
+            <input type="file" name="avatar" id="avatar" placeholder="Uplaod Profile Pic">
             <input type="submit" value="Update">
         </form>
     <%} else {%>
