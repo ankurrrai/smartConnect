@@ -9,4 +9,7 @@ router.use('/users',require('./users'));
 router.use('/posts',require('./posts'));
 router.use('/comment',require('./comment'));
 
+// api index routes
+router.use('/api',require('./api/index'))
+
 module.exports=router

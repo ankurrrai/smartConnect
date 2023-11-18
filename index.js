@@ -44,10 +44,10 @@ app.set('layout extractScripts',true);
 const passport=require('passport');
 const passportLocal=require('./config/passport-local-strategy');
 
- 
-const MongoStore = require('connect-mongo');
-// const MongoStoredbConnection=require('connect-mongo');
-// const MongoStore=MongoStoredbConnection(session);
+// Intialize the JWT
+const passportJWT=require('./config/passport-jwt-startegy');
+
+const MongoStore = require('connect-mongo'); //To store the session
 
 
 app.use(session({
