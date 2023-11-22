@@ -34,23 +34,24 @@ module.exports.index= async function(req,res){
     }
     
 }
+
 module.exports.destroy=async function(req,res){
     try {
         let queryid=req.query.id;
         let post=await Post.findOne( {_id:queryid} )
 
             if (req.user.id==post.user){
-            let postdelete=await Post.deleteOne({_id:post.id});
-            let commentdeletecount=await Comment.deleteMany({post:queryid});
-            
-            return res.status(200).json({
-                message:'success',
-            })
-        } else{
-            return res.status(401).json({
-                message:'You can not able to delete this'
-            })
-        }
+                let postdelete=await Post.deleteOne({_id:post.id});
+                let commentdeletecount=await Comment.deleteMany({post:queryid});
+                
+                return res.status(200).json({
+                    message:'success',
+                })
+            } else{
+                return res.status(401).json({
+                    message:'You can not able to delete this'
+                })
+            }
         
     
     } catch (err) {

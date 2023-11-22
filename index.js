@@ -47,6 +47,9 @@ const passportLocal=require('./config/passport-local-strategy');
 // Intialize the JWT
 const passportJWT=require('./config/passport-jwt-startegy');
 
+// Intialize the google
+const passportGoogle=require('./config/passport-google-auth2-strategy');
+
 const MongoStore = require('connect-mongo'); //To store the session
 
 

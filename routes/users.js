@@ -21,6 +21,15 @@ router.post('/create-session',passport.authenticate(
     {failureRedirect:'/users/sign-in'}
 ),userController.createSession); 
 
+// creating session using google
+
+router.get('/auth/google',passport.authenticate('google',{scope:['profile','email']}))  //according to need take the details and access from google
+
+router.get('/auth/google/callback',passport.authenticate(
+    'google',
+    {failureRedirect:'/users/sign-in'}
+),userController.createSession)
+
 // to signout
 router.get('/sign-out',userController.destroySession);
 
