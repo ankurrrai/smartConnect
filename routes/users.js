@@ -3,6 +3,7 @@ const router=express.Router();
 const passport=require('passport');
 
 const userController=require('../controllers/user_controller');
+const resetPassControllers=require('../controllers/reset_pass_controllers');
 
 router.get('/',userController.userHome);
 router.get('/profile',passport.checkAuthentication,userController.userProfile);
@@ -32,5 +33,13 @@ router.get('/auth/google/callback',passport.authenticate(
 
 // to signout
 router.get('/sign-out',userController.destroySession);
+
+
+// forget password
+router.get('/reset_page',resetPassControllers.resetPage);
+router.post('/reset',resetPassControllers.reset);
+router.get('/reset_password',resetPassControllers.resetPassword);
+router.post('/cred_update',resetPassControllers.newCred)
+
 
 module.exports=router

@@ -1,6 +1,9 @@
 const Comment=require('../models/comment');
 const Post=require('../models/post');
-const { populate } = require('../models/user');
+const commentsMailer=require('../mailers/comments_mailer');
+const queue=require('../config/kue');
+const commentsWorker=require('../workers/comments_worker');
+
 
 module.exports.create= async function(req,res){
 
@@ -15,8 +18,18 @@ module.exports.create= async function(req,res){
 
         post.comment.push(new_comment);
         post.save();
-        new_comment =await Comment.findOne({_id:new_comment._id}).populate('user')
+        new_comment =await Comment.findOne({_id:new_comment._id}).populate({
+            path:'user',
+            select:'-password'
+        })
 
+        // commentsMailer.newComment(new_comment); //called to send the email
+        let job=queue.create('emails',new_comment).save(function(err){
+            if (err){console.log('comment_controllers : Error in sending queue ',err);return;}
+
+            console.log('comment_controllers: job Enqueued - ',job.id)
+        });
+        
         if (req.xhr){
             return res.status(200).json({
                 data:{
