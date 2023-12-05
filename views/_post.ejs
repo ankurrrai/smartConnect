@@ -8,11 +8,22 @@
                <span>
                    <%= p.content %>
                </span>
-               
+               <% if(locals.user){%>
+            
+                <div class="likes-button">
+                    <a href="/likes/toggle/?id=<%= p._id %>&type=Post" class="toogle-like-button" data-likes="<%= p.likes.length %>"><%= p.likes.length %> <i class="fa fa-thumbs-up"></i></a>
+                </div>
+                <%} else{%>
+                    <div class="likes-button">
+                        <p class="toogle-like-button"><%= p.likes.length %> <i class="fa fa-thumbs-up"></i></p>
+                    </div>
+                <%}
+            %>
            </div>
            
 
            <% if(locals.user){%>
+            
                <div class="post-comments">
                    <form action="/comment/create" id="post-comment-form-<%=p._id%>" class="post-comment-form" method="post">
                        <input type="text" name="content" placeholder="Add Comment..." required>

@@ -21,7 +21,6 @@
         %>
         
         
-        
         <div id="all-post">
             <% if(post.length>0){%>
                 <h4>All Posts</h4>
@@ -40,11 +39,46 @@
     </section>
     
     <section id="home-friends-container">
-        <h4>Friends</h4>
+        <% if(locals.user) {%>
+            <h4>Friends</h4>
+            <% for (friend of currUser.friendship) {%>
+           
+                <% if (friend.requestStatus=='Pending') {%>
+                    <% if(locals.user.id==friend.from_user.id) {%>
+                        <div class="friendlist-response">
+                            <p><%= friend.to_user.name %></p>
+                            <a href="#">Request Pending</a>
+                            <a href="/friends/destroyrequest/?from_user=<%= friend.from_user.id %>&to_user=<%= friend.to_user.id %>&id=<%= friend.id %>&requestStatus=Declined">Remove</a>
+                        </div>
+                    <%} else {%>
+                        <div class="friendlist-response">
+                            <p> <%= friend.from_user.name %></p>
+                            <a href="/friends/acceptrequest/?id=<%= friend.id %>&requestStatus=Accepted">Accept</a>
+                            <a href="/friends/destroyrequest/?from_user=<%= friend.from_user.id %>&to_user=<%= friend.to_user.id %>&id=<%= friend.id %>&requestStatus=Declined">Remove</a>
+                        </div>
+                    <%} %>
+                <%} else {%>
+                    <% if(locals.user.id==friend.from_user.id) {%>
+                        <div class="friendlist-response">
+                            <span><%= friend.to_user.name %></span>
+                            <a href="/friends/destroyrequest/?from_user=<%= friend.from_user.id %>&to_user=<%= friend.to_user.id %>&id=<%= friend.id %>&requestStatus=Declined">Remove</a>
+                        </div>
+                    <%} else {%>
+                        <div class="friendlist-response">
+                            <span> <%= friend.from_user.name %></span>
+                            <a href="/friends/destroyrequest/?from_user=<%= friend.from_user.id %>&to_user=<%= friend.to_user.id %>&id=<%= friend.id %>&requestStatus=Declined">Remove</a>
+                        </div>
+                    <%} %>
+                <%} %>
+            <%}%>
+        <%} %>
+        
+        <h4>Smart Connect User</h4>
         <ul>
             <% for (u of  all_users) {%>
                 <li>
                     <a href="/users/profile/?id=<%= u.id %>"><%= u.name %></a>
+                    
                 </li>
             <%} %>
             
@@ -53,3 +87,19 @@
 </div>
 
 <script src="/js/home_script.js"></script>
+
+<!-- toogle the like button -->
+<script src="/js/likes_script.js"></script>
+<script>
+    $('.toogle-like-button').each(function(){
+        let toggleLike=new ToggleLike(this);
+    })
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
+<script src="/js/chat_engine.js"></script>
+
+<% if(locals.user) {%>
+    <script>
+        new chatEngine('chat-box','<%= locals.user.email %>')
+    </script>
+<%} %>

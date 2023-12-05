@@ -24,6 +24,36 @@
                 <%= currUser.email %>
             </div>
         </div>
+       
+        <%  if (friendFound==true) {%>
+           
+            <% if (friend.requestStatus=='Pending') {%>
+                <% if(locals.user.id==friend.from_user.id) {%>
+                    <div id="friendlist-response">
+                        <p><%= friend.to_user.name %></p>
+                        <a href="#">Request Pending</a>
+                        <a href="/friends/destroyrequest/?from_user=<%= friend.from_user.id %>&to_user=<%= friend.to_user.id %>&id=<%= friend.id %>&requestStatus=Declined">Remove</a>
+                    </div>
+                <%} else {%>
+                    <div id="friendlist-response">
+                        <p> <%= friend.from_user.name %></p>
+                        <a href="/friends/acceptrequest/?id=<%= friend.id %>&requestStatus=Accepted">Accept</a>
+                        <a href="/friends/destroyrequest/?from_user=<%= friend.from_user.id %>&to_user=<%= friend.to_user.id %>&id=<%= friend.id %>&requestStatus=Declined">Remove</a>
+                    </div>
+                <%} %>
+            <%} else {%>
+                <div>
+                     Friend Since <%= friend.createdAt %>
+                     <a href="/friends/destroyrequest/?from_user=<%= friend.from_user.id %>&to_user=<%= friend.to_user.id %>&id=<%= friend.id %>&requestStatus=Declined">Remove</a>
+                    
+                </div>
+            <%} %>
+            <%} else {%>
+                <div id="add-to-friendlist">
+                    <a href="/friends/sendrequest/?id=<%= currUser.id %>">Send Request</a>
+                </div>
+            <%} %>
+
         
     <%} %>
 

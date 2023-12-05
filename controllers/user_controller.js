@@ -1,5 +1,5 @@
 const User=require('../models/user')
-
+const FriendShip=require('../models/friends')
 const fs=require('fs');
 const path=require('path');
 
@@ -20,10 +20,42 @@ module.exports.userHome=function(req,res){
 // Action to render the userprofile page
 module.exports.userProfile=async function(req,res){
     try {
-        let currUser=await User.findById(req.query.id);
+        let currUser=await User.findById(req.query.id).populate({
+            path:'friendship',
+            populate:{
+                path:'from_user to_user',
+                select:'-password'
+            }
+        }).select('-password');
+        let friend=await FriendShip.findOne({
+            to_user:currUser._id,
+            from_user:req.user[0]._id,
+        }).populate('from_user to_user');
+        if (friend) {
+            return res.render('userprofile.ejs',{
+                title:"Profile",
+                currUser:currUser,
+                friend:friend,
+                friendFound:true
+            });
+        }
+        friend=await FriendShip.findOne({
+            from_user:currUser._id,
+            to_user:req.user[0]._id,
+        }).populate('from_user to_user')
+        if (friend) {
+            return res.render('userprofile.ejs',{
+                title:"Profile",
+                currUser:currUser,
+                friend:friend,
+                friendFound:true
+            });
+        }
         return res.render('userprofile.ejs',{
             title:"Profile",
-            currUser:currUser
+            currUser:currUser,
+            friend:'',
+            friendFound:false
         });
     } catch (err) {
         console.log(`Error in user_controller -> userProfile`)

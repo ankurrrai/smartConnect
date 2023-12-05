@@ -4,6 +4,7 @@ const commentsMailer=require('../mailers/comments_mailer');
 const queue=require('../config/kue');
 const commentsWorker=require('../workers/comments_worker');
 
+const Like= require('../models/likes');
 
 module.exports.create= async function(req,res){
 
@@ -23,12 +24,12 @@ module.exports.create= async function(req,res){
             select:'-password'
         })
 
-        // commentsMailer.newComment(new_comment); //called to send the email
-        let job=queue.create('emails',new_comment).save(function(err){
-            if (err){console.log('comment_controllers : Error in sending queue ',err);return;}
+        // //commentsMailer.newComment(new_comment); //called to send the email 
+        // let job=queue.create('emails',new_comment).save(function(err){
+        //     if (err){console.log('comment_controllers : Error in sending queue ',err);return;}
 
-            console.log('comment_controllers: job Enqueued - ',job.id)
-        });
+        //     console.log('comment_controllers: job Enqueued - ',job.id)
+        // });
         
         if (req.xhr){
             return res.status(200).json({
@@ -64,6 +65,8 @@ module.exports.destroy=async function(req,res){
 
             let post=await Post.findByIdAndUpdate(postid,{$pull : {comment: req.query.id}})
             
+            let count=await Like.deleteMany({likeable:comment,onmodel:'Comment'});
+            console.log('comment count: ',count)
             if (req.xhr){
                 return res.status(200).json({
                     data:{

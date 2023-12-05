@@ -48,3 +48,14 @@
     width: 20%;
     padding: 10px;
     border-style: groove; }
+
+    .likes-button i{
+      cursor: pointer;
+      font-size: 20px;
+      user-select: none;
+      color: black;
+    }
+
+    .likes-button i:hover{
+      color: darkblue;
+    }

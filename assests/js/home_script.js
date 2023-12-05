@@ -14,9 +14,10 @@
                     console.log(data)
                     let newPost= newPostDOM(data.data.newPost)
                     $('#all-post>ul').prepend(newPost);
-                    deletePost($(' .delete-post-button',newPost));
+                    deletePost($(' .delete-post-button ',newPost));
                     createComment(data.data.newPost._id);// call the create comment to add comment by using ajax
                     newPostForm[0].reset();
+                    new ToggleLike($(' .toogle-like-button',newPost));
                     NotyNotification('Post Published!','success');
                     
                 },
@@ -42,8 +43,10 @@
                    <span>
                        ${p.content}
                    </span>
-                   
-               </div>
+                   <div class="likes-button">
+                    <a href="/likes/toggle/?id=${p._id}&type=Post" class="toogle-like-button" data-likes="0">0 <i class="fa fa-thumbs-up"></i></a>
+                   </div>
+                </div>
                
     
                <div class="post-comments">
@@ -129,6 +132,7 @@
                     // $('#post-comments-'+newCommentid).prepend(comment);
                     $('#post-comments-'+newCommentid).append(comment);
                     deleteComment($(' .delete-comment-button',comment));
+                    new ToggleLike($(' .toogle-like-button',comment));
                     newComment[0].reset();
                     NotyNotification('Comment Added','success')
                 },
@@ -153,6 +157,9 @@
                 <small>
                     ${cmnt.user.email}
                 </small>
+                <div class="likes-button">
+                    <a href="/likes/toggle/?id=${cmnt._id}&type=Comment" class="toogle-like-button" data-likes="0">0 <i class="fa fa-thumbs-up"></i></a>
+                </div>
             </div>
        
     </li>`)
@@ -210,8 +217,6 @@
             timeout:1500
         }).show()
     };
-
-
 
 
 

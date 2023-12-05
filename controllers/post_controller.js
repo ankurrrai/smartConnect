@@ -2,6 +2,8 @@
 const Post=require('../models/post');
 const Comment=require('../models/comment');
 
+const Like=require('../models/likes');
+
 module.exports.create=async function(req,res){
 
     try {
@@ -9,8 +11,12 @@ module.exports.create=async function(req,res){
             content:req.body.content,
             user:res.locals.user._id
         });
-        newPost=await Post.findOne({_id:newPost._id}).populate('user')
-        newPost.user.password=''
+        newPost=await Post.findOne({_id:newPost._id}).populate(
+            {
+                path:'user',
+                select:'-password'
+            }
+        )
             // Added AJAX
             if (req.xhr){
                 return res.status(200).json({
@@ -39,6 +45,10 @@ module.exports.destroy=async function(req,res){
         if (res.locals.user.id==post.user){
             let postdelete=await Post.deleteOne({_id:post.id});
             let commentdeletecount=await Comment.deleteMany({post:queryid});
+
+            await Like.deleteMany({likeable:post,onmodel:'Post'});
+            await Like.deleteMany({likeable:{$in:post.comment}});
+            
 
             if (req.xhr) {
                 return res.status(200).json({

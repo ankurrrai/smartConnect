@@ -38,7 +38,17 @@ app.use(expressLayouts);
 app.set('layout extractStyles',true);
 app.set('layout extractScripts',true);
 
+// setup the web socket
+const chatServer=require('http').Server(app);
+const chatSocket=require('./config/chat_socket').chatSocket(chatServer);
+chatServer.listen(5000);
 
+// Google to remove that access-control block error (solution)
+chatServer.prependListener("request", (req, res) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+ });
+ 
+console.log('chat server is running on port 5000')
 
 // setup the passport
 const passport=require('passport');

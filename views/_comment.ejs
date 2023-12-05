@@ -12,6 +12,17 @@
             <small>
                 <%= cmnt.user.email %>
             </small>
+            <% if(locals.user){%>
+            
+                <div class="likes-button">
+                    <a href="/likes/toggle/?id=<%= cmnt._id %>&type=Comment" class="toogle-like-button" data-likes="<%= cmnt.likes.length %>"><%= cmnt.likes.length %> <i class="fa fa-thumbs-up"></i></a>
+                </div>
+                <%} else{%>
+                    <div class="likes-button">
+                        <p class="toogle-like-button"><%= cmnt.likes.length %> <i class="fa fa-thumbs-up"></i></p>
+                    </div>
+                <%}
+            %>
         </div>
    
 </li>
