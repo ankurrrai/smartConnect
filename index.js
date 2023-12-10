@@ -1,7 +1,15 @@
 const express=require('express');
 const app=express();
-const port=8000;
+const env=require('./config/environment')
+const port=env.smartConnect_port;
 const session=require('express-session');
+const path=require('path')
+
+// setup morgan for logger
+const logger=require('morgan');
+app.use(logger(env.morgan.mode,env.morgan.options));
+
+
 // setup the url encoded
 app.use(express.urlencoded());
 
@@ -9,18 +17,21 @@ app.use(express.urlencoded());
 const cookieParser=require('cookie-parser');
 app.use(cookieParser());
 
-// // set up the SAAS for styling
-// const sassMiddleware=require('node-sass-middleware');
-// app.use(sassMiddleware({
-//     src:'./assests/scss',
-//     dest:'./assests/css',
-//     debug:true,
-//     outputStyle:'extended', //extended
-//     prefix:'/css'
-// }));
+// set up the SAAS for styling
+if(env.name=='development'){
+    const sassMiddleware=require('node-sass-middleware');
+    app.use(sassMiddleware({
+    src:path.join(__dirname,env.smartConnect_assetPath,'scss'),
+    dest:path.join(__dirname,env.smartConnect_assetPath,'css'),
+    debug:true,
+    outputStyle:'extended', //extended
+    prefix:'/css'
+    }));
+}
+
 
 // setup the static file
-app.use(express.static('./assests'))
+app.use(express.static(env.smartConnect_assetPath))
 
 // Give the path for uploads
 app.use('/uploads',express.static(__dirname + '/uploads'))
@@ -66,7 +77,7 @@ const MongoStore = require('connect-mongo'); //To store the session
 app.use(session({
     name:'smartConnect',
     // todo change the secret before in production mode
-    secret:'Hvae to do this dynamic',
+    secret:env.smartConnect_session_screctKey,
     saveUninitialized:false,
     resave:false,
     cookie:{
@@ -74,7 +85,7 @@ app.use(session({
     },
     store:MongoStore.create(    
         {
-            mongoUrl:'mongodb://127.0.0.1:27017/smartConnect_development' //have to read the documentation
+            mongoUrl:`${env.smartConnect_dbURL}/${env.smartConnect_dbName}` //have to read the documentation
         }
     )
 }));

@@ -3,11 +3,11 @@ const JwtStrategy=require('passport-jwt').Strategy;
 const ExtractJwt=require('passport-jwt').ExtractJwt;
 
 const User=require('../models/user');
-
+const env=require('./environment')
 
 let opts={
     jwtFromRequest:ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey:'smartConnect'
+    secretOrKey:env.smartConnect_jwt_screctKey
 }
 
 

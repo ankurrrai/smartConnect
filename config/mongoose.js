@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const env=require('./environment')
+
 
 main().catch(function(err){
     console.log(`Error while connection with db ${err}`)
@@ -6,7 +8,7 @@ main().catch(function(err){
 
 // coonect to db
 async function main (){
-    mongoose.connect('mongodb://127.0.0.1:27017/smartConnect_development')
+    mongoose.connect(`${env.smartConnect_dbURL}/${env.smartConnect_dbName}`)
 }
 
 // accuire the db

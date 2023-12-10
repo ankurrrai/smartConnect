@@ -9,7 +9,7 @@ module.exports.chatSocket=function(chatServer){
         });
 
         socket.on('join_room',function(data){
-            console.log('Joining request recevied : ',data);
+            // console.log('Joining request recevied : ',data);
             socket.join(data.chatRoom);
 
             io.in(data.chatRoom).emit('user_joined',data);

@@ -1,6 +1,7 @@
 
 const User=require('../../../models/user');
 const jwt=require('jsonwebtoken');
+const env=require('../../../config/environment')
 
 module.exports.createSession=async function(req,res){
     try {
@@ -14,7 +15,7 @@ module.exports.createSession=async function(req,res){
         return res.status(200).json({
             message:'success',
             data:{
-                token:jwt.sign(user.toJSON(),'smartConnect',{expiresIn:'100000'})
+                token:jwt.sign(user.toJSON(),env.smartConnect_jwt_screctKey,{expiresIn:'100000'})
             }
         })
 
