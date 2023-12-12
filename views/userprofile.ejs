@@ -1,61 +1,63 @@
 <link rel="stylesheet" href="/css/user_profile.css">
-
-<% if (currUser.avatar){%>
-    <img src="<%= currUser.avatar %>" alt="<%= currUser.name %>" width="100">
-<%} else {%>
-    <img src="/uploads/users/avatars/dummy.jpg" alt="<%= currUser.name %>" width="100">
-<%} %>
-
-
-
-<% if(locals.user.id==currUser.id){%>
-        <form action="/users/update/?id=<%= currUser.id %>" enctype="multipart/form-data" method="post">
-            <input type="text" name="name" id="name" placeholder="Your Name" value="<%= currUser.name %>" required>
-            <input type="email" name="email" id="email" placeholder="Your Email" value="<%= currUser.email %>" required>
-            <input type="file" name="avatar" id="avatar" placeholder="Uplaod Profile Pic">
-            <input type="submit" value="Update">
-        </form>
+<div id="user-profile">
+    
+    <% if (currUser.avatar){%>
+        <img class="profile-image" src="<%= currUser.avatar %>" alt="<%= currUser.name %>">
     <%} else {%>
-        <div id="user-details">
-            <div>
-                <%= currUser.name %>
+        <img class="profile-image" src="/uploads/users/avatars/dummy.jpg" alt="<%= currUser.name %>">
+    <%} %>
+
+
+
+    <% if(locals.user.id==currUser.id){%>
+            <form action="/users/update/?id=<%= currUser.id %>" enctype="multipart/form-data" method="post">
+                <input type="text" name="name" id="name" placeholder="Your Name" value="<%= currUser.name %>" required>
+                <input type="email" name="email" id="email" placeholder="Your Email" value="<%= currUser.email %>" required>
+                <input type="file" name="avatar" id="avatar" placeholder="Uplaod Profile Pic">
+                <input type="submit" value="Update">
+            </form>
+        <%} else {%>
+            <div id="user-details">
+                <div>
+                    <%= currUser.name %>
+                </div>
+                <div>
+                    <%= currUser.email %>
+                </div>
             </div>
-            <div>
-                <%= currUser.email %>
-            </div>
-        </div>
-       
-        <%  if (friendFound==true) {%>
-           
-            <% if (friend.requestStatus=='Pending') {%>
-                <% if(locals.user.id==friend.from_user.id) {%>
-                    <div id="friendlist-response">
-                        <p><%= friend.to_user.name %></p>
-                        <a href="#">Request Pending</a>
-                        <a href="/friends/destroyrequest/?from_user=<%= friend.from_user.id %>&to_user=<%= friend.to_user.id %>&id=<%= friend.id %>&requestStatus=Declined">Remove</a>
-                    </div>
+        
+            <%  if (friendFound==true) {%>
+            
+                <% if (friend.requestStatus=='Pending') {%>
+                    <% if(locals.user.id==friend.from_user.id) {%>
+                        <div class="friendlist-response">
+                            <!-- <p><%= friend.to_user.name %></p> -->
+                            <a href="#">Request Pending</a>
+                            <a href="/friends/destroyrequest/?from_user=<%= friend.from_user.id %>&to_user=<%= friend.to_user.id %>&id=<%= friend.id %>&requestStatus=Declined">Remove</a>
+                        </div>
+                    <%} else {%>
+                        <div class="friendlist-response">
+                            <!-- <p> <%= friend.from_user.name %></p> -->
+                            <a href="/friends/acceptrequest/?id=<%= friend.id %>&requestStatus=Accepted">Accept</a>
+                            <a href="/friends/destroyrequest/?from_user=<%= friend.from_user.id %>&to_user=<%= friend.to_user.id %>&id=<%= friend.id %>&requestStatus=Declined">Remove</a>
+                        </div>
+                    <%} %>
                 <%} else {%>
-                    <div id="friendlist-response">
-                        <p> <%= friend.from_user.name %></p>
-                        <a href="/friends/acceptrequest/?id=<%= friend.id %>&requestStatus=Accepted">Accept</a>
+                    <div class="friendlist-response">
+                        <span>Friend Since <%= friend.createdAt %></span>
                         <a href="/friends/destroyrequest/?from_user=<%= friend.from_user.id %>&to_user=<%= friend.to_user.id %>&id=<%= friend.id %>&requestStatus=Declined">Remove</a>
+                        
                     </div>
                 <%} %>
-            <%} else {%>
-                <div>
-                     Friend Since <%= friend.createdAt %>
-                     <a href="/friends/destroyrequest/?from_user=<%= friend.from_user.id %>&to_user=<%= friend.to_user.id %>&id=<%= friend.id %>&requestStatus=Declined">Remove</a>
-                    
-                </div>
-            <%} %>
-            <%} else {%>
-                <div id="add-to-friendlist">
-                    <a href="/friends/sendrequest/?id=<%= currUser.id %>">Send Request</a>
-                </div>
-            <%} %>
+                <%} else {%>
+                    <div class="add-to-friendlist friendlist-response">
+                        <a href="/friends/sendrequest/?id=<%= currUser.id %>">Send Request</a>
+                    </div>
+                <%} %>
 
-        
-    <%} %>
+            
+        <%} %>
+</div>
 
 
 

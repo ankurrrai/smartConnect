@@ -147,11 +147,7 @@
     let newCommentDOM=function(cmnt){
         return $(`<li id="comment-${cmnt._id}">
                         
-            <div class="comment-delete-button">
-                <a class="delete-comment-button" href="/comment/destroy/?id=${cmnt._id}">Del Comment</a>
-            </div>
-       
-            <div>
+            <div class="comment-content">
                 ${cmnt.content}
                 <br>
                 <small>
@@ -160,6 +156,10 @@
                 <div class="likes-button">
                     <a href="/likes/toggle/?id=${cmnt._id}&type=Comment" class="toogle-like-button" data-likes="0">0 <i class="fa fa-thumbs-up"></i></a>
                 </div>
+            </div>
+
+            <div class="comment-delete-button">
+                <a class="delete-comment-button" href="/comment/destroy/?id=${cmnt._id}">Del Comment</a>
             </div>
        
     </li>`)

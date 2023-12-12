@@ -1,11 +1,33 @@
 #home-container{
     min-height: 100%;
     display: flex;
+    // background-color: lightgray;
     padding: 20px;
-    #useful-links{
+    #friends-list{
+        max-height: 500px;
+        overflow-y: auto;
         width: 20%;
         padding: 10px;
-        border-style: groove;
+        // border-style: groove;
+        
+        .friendlist-response{
+            display: flex;
+            justify-content: space-between;
+            align-items: self-start;
+            margin-top: 10px;
+            background-color: burlywood;
+            a{
+                text-decoration: none;
+                color: black;
+               
+                
+            }
+            :hover {
+                background-color: white;
+                color: darkblue;
+                border-style: none;
+            }
+        }
     }
 
     #home-posts-container{
@@ -39,7 +61,6 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            // align-items: center;
             width: 70%;
             margin-left: 15%;
             margin-right: 15%;
@@ -50,32 +71,131 @@
                 padding: 0px;
             }
             .home-allPost{
-                // min-width: 500px;
                 width: 100%;
                 border-style: groove;
-                // min-height: 400px;
                 display: flex;
                 justify-content: space-between;
                 margin-bottom: 50px;
                 padding: 10px;
+                background-color:lightgray;
+                .home-allPost-content{
+                    width: 80%;
+                    div {
+                        max-width: 100%;
+                        // background-color: aqua;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: flex-start;
+                        align-content: flex-start;
+                        flex-wrap: nowrap;
+
+                        span {
+                            // max-width: 100%;
+                            display: inline-block;
+                            height: auto;
+                            word-wrap: break-word;
+
+                        }
+                    }
+                    .post-comments .comment-btn{
+                       
+                        background-color: black;
+                        color: white;
+                        font-size:1rem;
+                        border: none;
+                    }
+                    .post-comments-list ul li{
+                        display: flex;
+                        justify-content: space-between;
+
+                        .comment-content{
+                            word-wrap: break-word;
+                            min-width: 80%;
+                            margin: 5px;
+
+                            
+                        }
+
+                        .comment-delete-button{
+                            width: 20%;
+                            margin-left: 10px;
+                            display: inline;
+                            a{
+                                text-decoration: none;
+                                color: black;
+                            }
+                            :hover {
+                                color: darkblue;
+                                background-color: white;
+                            }
+                        }
+
+                    }
+                }
                 
+                .delete-button a {
+                    text-decoration: none;
+                    cursor: pointer;
+                    color: black;
+
+                    
+                }
+                .delete-button :hover {
+                    color: darkblue;
+                    background-color: white;
+
+                    
+                }
             }
         }
     }
 
     #home-friends-container{
+        max-height: 500px;
+        overflow-y: auto;
         width: 20%;
         padding: 10px;
-        border-style: groove;
+        // border-style: groove;    
+
+        ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+
+            li{
+                background-color: burlywood;
+                margin-top: 10px;
+                a{
+                    text-decoration: none;
+                    color: black;
+                    
+                    
+                }
+                :hover {
+                    background-color: white;
+                    color: darkblue;
+                    border-style: none;
+                }
+            }
+        }
+
+        
     }
 
 }
 
-.likes-button i{
-    cursor: pointer;
-    font-size: 20px;
-    user-select: none;
-    color: black;
+
+.likes-button{
+    i{
+        cursor: pointer;
+        font-size: 20px;
+        user-select: none;
+        color: black;
+    }
+    a{
+        text-decoration: none;
+        color: black;
+    }
   }
 
   .likes-button i:hover{

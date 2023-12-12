@@ -1,8 +1,41 @@
 <link rel="stylesheet" href="/css/home.css">
 
 <div id="home-container">
-    <section id="useful-links">
-        <h4>Use ful Links</h4>
+    <section id="friends-list">
+        <% if(locals.user) {%>
+            <h4>Friends</h4>
+            <% for (friend of currUser.friendship) {%>
+           
+                <% if (friend.requestStatus=='Pending') {%>
+                    <% if(locals.user.id==friend.from_user.id) {%>
+                        <div class="friendlist-response">
+                            <span><%= friend.to_user.name %></span>
+                            <a href="/friends/destroyrequest/?from_user=<%= friend.from_user.id %>&to_user=<%= friend.to_user.id %>&id=<%= friend.id %>&requestStatus=Declined">Cancel Request</a>
+                        </div>
+                    <%} else {%>
+                        <div class="friendlist-response">
+                            <span> <%= friend.from_user.name %></span>
+                            <a href="/friends/acceptrequest/?id=<%= friend.id %>&requestStatus=Accepted">Accept</a>
+                            <a href="/friends/destroyrequest/?from_user=<%= friend.from_user.id %>&to_user=<%= friend.to_user.id %>&id=<%= friend.id %>&requestStatus=Declined">Remove</a>
+                        </div>
+                    <%} %>
+                <%} else {%>
+                    <% if(locals.user.id==friend.from_user.id) {%>
+                        <div class="friendlist-response">
+                            <span><%= friend.to_user.name %></span>
+                            <a href="/friends/destroyrequest/?from_user=<%= friend.from_user.id %>&to_user=<%= friend.to_user.id %>&id=<%= friend.id %>&requestStatus=Declined">Unfriend</a>
+                        </div>
+                    <%} else {%>
+                        <div class="friendlist-response">
+                            <span> <%= friend.from_user.name %></span>
+                            <a href="/friends/destroyrequest/?from_user=<%= friend.from_user.id %>&to_user=<%= friend.to_user.id %>&id=<%= friend.id %>&requestStatus=Declined">Unfriend</a>
+                        </div>
+                    <%} %>
+                <%} %>
+            <%}%>
+        <%} else {%>
+            <span style="word-wrap: break-word;">Login to see friends</span>
+        <%} %>
     </section>
 
     <section id="home-posts-container">
@@ -22,10 +55,7 @@
         
         
         <div id="all-post">
-            <% if(post.length>0){%>
-                <h4>All Posts</h4>
-                <%}
-            %>
+            
             <ul id="all-post-container">
                 <% for (p of post) {%>
                     
@@ -39,39 +69,7 @@
     </section>
     
     <section id="home-friends-container">
-        <% if(locals.user) {%>
-            <h4>Friends</h4>
-            <% for (friend of currUser.friendship) {%>
-           
-                <% if (friend.requestStatus=='Pending') {%>
-                    <% if(locals.user.id==friend.from_user.id) {%>
-                        <div class="friendlist-response">
-                            <p><%= friend.to_user.name %></p>
-                            <a href="#">Request Pending</a>
-                            <a href="/friends/destroyrequest/?from_user=<%= friend.from_user.id %>&to_user=<%= friend.to_user.id %>&id=<%= friend.id %>&requestStatus=Declined">Remove</a>
-                        </div>
-                    <%} else {%>
-                        <div class="friendlist-response">
-                            <p> <%= friend.from_user.name %></p>
-                            <a href="/friends/acceptrequest/?id=<%= friend.id %>&requestStatus=Accepted">Accept</a>
-                            <a href="/friends/destroyrequest/?from_user=<%= friend.from_user.id %>&to_user=<%= friend.to_user.id %>&id=<%= friend.id %>&requestStatus=Declined">Remove</a>
-                        </div>
-                    <%} %>
-                <%} else {%>
-                    <% if(locals.user.id==friend.from_user.id) {%>
-                        <div class="friendlist-response">
-                            <span><%= friend.to_user.name %></span>
-                            <a href="/friends/destroyrequest/?from_user=<%= friend.from_user.id %>&to_user=<%= friend.to_user.id %>&id=<%= friend.id %>&requestStatus=Declined">Remove</a>
-                        </div>
-                    <%} else {%>
-                        <div class="friendlist-response">
-                            <span> <%= friend.from_user.name %></span>
-                            <a href="/friends/destroyrequest/?from_user=<%= friend.from_user.id %>&to_user=<%= friend.to_user.id %>&id=<%= friend.id %>&requestStatus=Declined">Remove</a>
-                        </div>
-                    <%} %>
-                <%} %>
-            <%}%>
-        <%} %>
+        
         
         <h4>Smart Connect User</h4>
         <ul>

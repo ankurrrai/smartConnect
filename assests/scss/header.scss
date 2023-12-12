@@ -39,6 +39,18 @@
                     
                 }
             }
+            span{
+                cursor: pointer;
+                text-decoration: none;
+                color: white;
+                font-weight: bold;
+                font-size: 1em;
+
+                &:hover{
+                    color: blue;
+                    
+                }
+            }
         }
     }
     

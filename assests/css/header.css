@@ -26,3 +26,11 @@
         font-size: 1em; }
         #main-header ul li a:hover {
           color: blue; }
+      #main-header ul li span {
+        cursor: pointer;
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        font-size: 1em; }
+        #main-header ul li span:hover {
+          color: blue; }

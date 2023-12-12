@@ -1,8 +1,40 @@
-body #title {
-  text-align: center; }
-
-body #user-details {
-  margin: 10px;
-  padding: 50px;
-  font-size: 1em;
-  font-weight: bold; }
+#user-profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px; }
+  #user-profile .profile-image {
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    margin-bottom: 80px; }
+  #user-profile form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    border-style: groove;
+    padding: 10px; }
+    #user-profile form input {
+      height: 50px;
+      margin-bottom: 10px;
+      border-style: none; }
+    #user-profile form :last-child {
+      color: white;
+      background-color: black;
+      padding: 20px; }
+  #user-profile #user-details {
+    font-style: inherit;
+    font-weight: bold;
+    text-align: start; }
+  #user-profile .friendlist-response {
+    margin-top: 20px; }
+    #user-profile .friendlist-response span {
+      font-weight: bold; }
+    #user-profile .friendlist-response a {
+      text-decoration: none;
+      color: black;
+      border-style: groove; }
+    #user-profile .friendlist-response :hover {
+      color: blue;
+      border-style: none; }

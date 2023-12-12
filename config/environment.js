@@ -72,4 +72,4 @@ const production={
     }
 }
 
-module.exports=eval(process.env.smartConnect_name)==undefined ? development:eval(process.env.smartConnect_name);
+module.exports=eval(process.env.NODE_ENV)==undefined ? development:eval(process.env.NODE_ENV);

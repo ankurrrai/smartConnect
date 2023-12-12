@@ -1,20 +1,53 @@
+
 <div class="chat-container" id="chat-box">
-    <div class="chat-header">SmartConnect Chat</div>
-    <div class="chat-messages" id="chat-box-messages">
-      <!-- <div class="message user-message">
-        <div class="avatar"><img src="\uploads\users\avatars/avatar-1700146987024-299049559" alt="Notfound"></div>
-        <div class="message-bubble">User message</div>
-        <div class="timestamp">10:30 AM</div>
-      </div>
-      <div class="message other-message">
-        <div class="avatar"><img src="\uploads\users\avatars/avatar-1700146987024-299049559" alt="Notfound"></div>
-        <div class="message-bubble-other">User Friend Message</div>
-        <div class="timestamp">10:35 AM</div>
-      </div> -->
-      <!-- Add more messages here -->
-    </div>
-    <div class="message-input">
-      <input id="input-message" type="text" class="input-field" placeholder="Type your message...">
-      <button class="send-button" id="send-button">Send</button>
-    </div>
+  <div id="buttons">
+    <!-- <div>Open Chat</div>  -->
+    <button id="plus-chat-button">+</button>
+    <button id="minus-chat-button" disabled>-</button>
   </div>
+    <div id="chat-main-container" style="display: none;">
+      <div class="chat-header">SmartConnect Chat</div>
+      <div class="chat-messages" id="chat-box-messages">
+        <!-- <div class="message user-message">
+          <div class="avatar"><img src="\uploads\users\avatars/avatar-1700146987024-299049559" alt="Notfound"></div>
+          <div class="message-bubble">User message</div>
+          <div class="timestamp">10:30 AM</div>
+        </div>
+        <div class="message other-message">
+          <div class="avatar"><img src="\uploads\users\avatars/avatar-1700146987024-299049559" alt="Notfound"></div>
+          <div class="message-bubble-other">User Friend Message</div>
+          <div class="timestamp">10:35 AM</div>
+        </div> -->
+        <!-- Add more messages here -->
+      </div>
+      <div class="message-input">
+        <input id="input-message" type="text" class="input-field" placeholder="Type your message...">
+        <button class="send-button" id="send-button">Send</button>
+      </div>
+    </div>
+</div>
+
+<script>
+  let plusbtn=document.getElementById('plus-chat-button');
+  let minusbtn=document.getElementById('minus-chat-button')
+  let mainChat=document.getElementById('chat-main-container')
+
+  plusbtn.addEventListener('click', function(e){
+    minusbtn.disabled=false;
+    plusbtn.disabled=true
+    mainChat.style.display='block'
+  })
+
+  minusbtn.addEventListener('click' ,function(e){
+    plusbtn.disabled=false;
+    minusbtn.disabled=true
+    mainChat.style.display='none'
+  })
+
+  document.getElementById('users-chat').addEventListener('click',function(e){
+    minusbtn.disabled=false;
+    plusbtn.disabled=true
+    mainChat.style.display='block'
+  })
+
+</script>

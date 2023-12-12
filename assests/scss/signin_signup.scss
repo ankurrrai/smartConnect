@@ -1,0 +1,41 @@
+.user-signin-signup{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    form{
+        margin-top: 50px;
+        display: flex;
+        flex-direction: column;
+        width: 250px;
+        border-style: groove;
+        padding: 10px;
+        font-size: 1rem;
+        font-weight: bold;
+        input{
+            margin-bottom: 20px;
+            border-style: none;
+        }
+        :last-child{
+            background-color: black;
+            color: white;
+        }
+
+    }
+
+    div{
+        margin-top: 20px;
+        a{
+            text-decoration: none;
+            color: black;
+            border-style: ridge;
+            padding: 10px;
+           
+        }
+        a:hover {
+            border-style: none;
+            color: blue;
+          }
+    }
+}

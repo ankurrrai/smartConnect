@@ -1,0 +1,37 @@
+#reset-user-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    form{
+    
+        label  {
+            display: block;
+            font-weight: bold;
+        }
+        :last-child {
+            background-color: black;
+            color: white;
+        }
+    }
+}
+ 
+#user-reset-password{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    div {
+        label  {
+            margin-top: 10px;
+            display: block;
+            font-weight: bold;
+        }
+        :last-child {
+            margin-top: 20px;
+            display: block;
+            background-color: black;
+            color: white;
+        }
+    }
+}

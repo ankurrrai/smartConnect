@@ -2,10 +2,24 @@
   min-height: 100%;
   display: flex;
   padding: 20px; }
-  #home-container #useful-links {
+  #home-container #friends-list {
+    max-height: 500px;
+    overflow-y: auto;
     width: 20%;
-    padding: 10px;
-    border-style: groove; }
+    padding: 10px; }
+    #home-container #friends-list .friendlist-response {
+      display: flex;
+      justify-content: space-between;
+      align-items: self-start;
+      margin-top: 10px;
+      background-color: burlywood; }
+      #home-container #friends-list .friendlist-response a {
+        text-decoration: none;
+        color: black; }
+      #home-container #friends-list .friendlist-response :hover {
+        background-color: white;
+        color: darkblue;
+        border-style: none; }
   #home-container #home-posts-container {
     width: 60%;
     padding: 10px; }
@@ -43,16 +57,78 @@
         display: flex;
         justify-content: space-between;
         margin-bottom: 50px;
-        padding: 10px; }
+        padding: 10px;
+        background-color: lightgray; }
+        #home-container #home-posts-container #all-post .home-allPost .home-allPost-content {
+          width: 80%; }
+          #home-container #home-posts-container #all-post .home-allPost .home-allPost-content div {
+            max-width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-content: flex-start;
+            flex-wrap: nowrap; }
+            #home-container #home-posts-container #all-post .home-allPost .home-allPost-content div span {
+              display: inline-block;
+              height: auto;
+              word-wrap: break-word; }
+          #home-container #home-posts-container #all-post .home-allPost .home-allPost-content .post-comments .comment-btn {
+            background-color: black;
+            color: white;
+            font-size: 1rem;
+            border: none; }
+          #home-container #home-posts-container #all-post .home-allPost .home-allPost-content .post-comments-list ul li {
+            display: flex;
+            justify-content: space-between; }
+            #home-container #home-posts-container #all-post .home-allPost .home-allPost-content .post-comments-list ul li .comment-content {
+              word-wrap: break-word;
+              min-width: 80%;
+              margin: 5px; }
+            #home-container #home-posts-container #all-post .home-allPost .home-allPost-content .post-comments-list ul li .comment-delete-button {
+              width: 20%;
+              margin-left: 10px;
+              display: inline; }
+              #home-container #home-posts-container #all-post .home-allPost .home-allPost-content .post-comments-list ul li .comment-delete-button a {
+                text-decoration: none;
+                color: black; }
+              #home-container #home-posts-container #all-post .home-allPost .home-allPost-content .post-comments-list ul li .comment-delete-button :hover {
+                color: darkblue;
+                background-color: white; }
+        #home-container #home-posts-container #all-post .home-allPost .delete-button a {
+          text-decoration: none;
+          cursor: pointer;
+          color: black; }
+        #home-container #home-posts-container #all-post .home-allPost .delete-button :hover {
+          color: darkblue;
+          background-color: white; }
   #home-container #home-friends-container {
+    max-height: 500px;
+    overflow-y: auto;
     width: 20%;
-    padding: 10px;
-    border-style: groove; }
+    padding: 10px; }
+    #home-container #home-friends-container ul {
+      padding: 0;
+      margin: 0;
+      list-style: none; }
+      #home-container #home-friends-container ul li {
+        background-color: burlywood;
+        margin-top: 10px; }
+        #home-container #home-friends-container ul li a {
+          text-decoration: none;
+          color: black; }
+        #home-container #home-friends-container ul li :hover {
+          background-color: white;
+          color: darkblue;
+          border-style: none; }
 
 .likes-button i {
   cursor: pointer;
   font-size: 20px;
   user-select: none;
+  color: black; }
+
+.likes-button a {
+  text-decoration: none;
   color: black; }
 
 .likes-button i:hover {

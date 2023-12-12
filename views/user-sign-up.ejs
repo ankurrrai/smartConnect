@@ -1,17 +1,24 @@
-<h1>
-    This is user <%= title %> page
-</h1>
-
-<form action="/users/create" method="post">
+<link rel="stylesheet" href="/css/signin_signup.css">
+<div class="user-signin-signup">
+    <h1>
+        User <%= title %>
+    </h1>
     
-    <input type="text" name="name" placeholder="Your name" id="name" required>
-    <input type="email" name="email" id="email" placeholder="Your Email" required>
-    <input type="password" name="password" id="password" placeholder="Create Password" required>
-    <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm your Password" required>
-    <input type="submit" value="Sign Up">
-
-</form>
-
-<a href="/users/auth/google">Google Sign In/ Sign Up</a>
-
-<a href="/users/reset_page">Forget Password</a>
+    <form action="/users/create" method="post">
+        <label for="name">Name</label>
+        <input type="text" name="name" placeholder="Name..." id="name" required>
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" placeholder="Your Email" required>
+        <label for="password">Create Password</label>
+        <input type="password" name="password" id="password" placeholder="Create Password" required>
+        <label for="confirm_password">Confirm Password</label>
+        <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm your Password" required>
+        <input type="submit" value="Sign Up">
+    
+    </form>
+    
+    <div>
+        <a href="/users/auth/google">Google Sign In/ Sign Up</a>
+    <a href="/users/reset_page">Forget Password</a>
+    </div>
+</div>
