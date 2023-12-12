@@ -1,6 +1,7 @@
 const express=require('express');
 const app=express();
 const env=require('./config/environment')
+const viewHelper=require('./config/view_helper')(app)
 const port=env.smartConnect_port;
 const session=require('express-session');
 const path=require('path')
@@ -8,7 +9,7 @@ const path=require('path')
 // setup morgan for logger
 const logger=require('morgan');
 app.use(logger(env.morgan.mode,env.morgan.options));
-
+// console.log(app.locals)
 
 // setup the url encoded
 app.use(express.urlencoded());

@@ -14,10 +14,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/layout.css">
-    <link rel="stylesheet" href="/css/header.css">
-    <link rel="stylesheet" href="/css/footer.css">
-    <link rel="stylesheet" href="/css/chatbox.css">
+    <link rel="stylesheet" href="<%= assespath('css/layout.css') %>">
+    <link rel="stylesheet" href="<%= assespath('css/header.css') %>">
+    <link rel="stylesheet" href="<%= assespath('css/footer.css') %>">
+    <link rel="stylesheet" href="<%= assespath('css/chatbox.css') %>">
     
 
     <%- style %>
@@ -35,6 +35,13 @@
     <%} %>
 
     <%- script %>
+    
+    <script src="<%= assespath('js/chat_engine.js') %>"></script>
+    <% if(locals.user) {%>
+        <script>
+            new chatEngine('chat-box','<%= locals.user.email %>')
+        </script>
+    <%} %>
 
     <!-- Noty js to enable notification -->
     <% if (flash.success && flash.success.length){%>
