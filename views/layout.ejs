@@ -30,14 +30,14 @@
     </div>
 
     <%- include('_footer'); %>
-    <% if (locals.user) {%>
+    <% if (locals.user &&  title=='Home') {%>
         <%- include('_chatbox'); %>
     <%} %>
 
     <%- script %>
     
     <script src="<%= assespath('js/chat_engine.js') %>"></script>
-    <% if(locals.user) {%>
+    <% if(locals.user &&  title=='Home') {%>
         <script>
             new chatEngine('chat-box','<%= locals.user.email %>')
         </script>

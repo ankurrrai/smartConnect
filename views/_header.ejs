@@ -7,9 +7,11 @@
                     Home
                 </a>
             </li>
-            <li>
-                <span id="users-chat">Chat</span>
-            </li>
+            <% if (title=='Home') {%>
+                <li>
+                        <span id="users-chat">Chat</span>
+                </li>
+            <%} %>
             <li>
                 <a href="/users/sign-out">Sign Out</a>
             </li>
