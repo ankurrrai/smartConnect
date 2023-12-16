@@ -7,7 +7,7 @@
   "css/reset_cred.css": "css/reset_cred-c76693b04b.css",
   "css/signin_signup.css": "css/signin_signup-942ddeb59e.css",
   "css/user_profile.css": "css/user_profile-ac860e5dd6.css",
-  "js/chat_engine.js": "js/chat_engine-83cf34faa5.js",
+  "js/chat_engine.js": "js/chat_engine.js",
   "js/home_script.js": "js/home_script-3d96a5e692.js",
   "js/likes_script.js": "js/likes_script-fee4c1b440.js"
 }
