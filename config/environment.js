@@ -39,8 +39,8 @@ const development={
     morgan:{
         mode:'dev',
         options:{stream:accessLogStream}
-    }
-
+    },
+    homeurl:"localhost:8000"
 }
 
 
@@ -69,7 +69,8 @@ const production={
     morgan:{
         mode:'combined',
         options:{stream:accessLogStream}
-    }
+    },
+    homeurl:"smartconnect.fun"
 }
 
 module.exports=eval(process.env.NODE_ENV)==undefined ? development:eval(process.env.NODE_ENV);

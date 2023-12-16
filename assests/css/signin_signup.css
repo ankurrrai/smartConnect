@@ -1,1 +1,30 @@
-.user-signin-signup{display:flex;flex-direction:column;justify-content:center;align-items:center}.user-signin-signup form{margin-top:50px;display:flex;flex-direction:column;width:250px;border-style:groove;padding:10px;font-size:1rem;font-weight:700}.user-signin-signup form input{margin-bottom:20px;border-style:none}.user-signin-signup form :last-child{background-color:#000;color:#fff}.user-signin-signup div{margin-top:20px}.user-signin-signup div a{text-decoration:none;color:#000;border-style:ridge;padding:10px}.user-signin-signup div a:hover{border-style:none;color:blue}
+.user-signin-signup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+  .user-signin-signup form {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    border-style: groove;
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: bold; }
+    .user-signin-signup form input {
+      margin-bottom: 20px;
+      border-style: none; }
+    .user-signin-signup form :last-child {
+      background-color: black;
+      color: white; }
+  .user-signin-signup div {
+    margin-top: 20px; }
+    .user-signin-signup div a {
+      text-decoration: none;
+      color: black;
+      border-style: ridge;
+      padding: 10px; }
+    .user-signin-signup div a:hover {
+      border-style: none;
+      color: blue; }

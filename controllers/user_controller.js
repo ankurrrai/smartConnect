@@ -131,15 +131,18 @@ module.exports.signIn=function(req,res){
 };
 
 
+
 // Action to create new user
 module.exports.create=async function(req,res){
+
 
     try {
         if (req.body.password != req.body.confirm_password){
             console.log('Password is not same!')
             return res.redirect('back');
         };
-    
+
+
         let user=await User.findOne({email:req.body.email})
         if (!user){
             let newUser=await User.create(req.body);

@@ -9,7 +9,7 @@ const path=require('path')
 // setup morgan for logger
 const logger=require('morgan');
 app.use(logger(env.morgan.mode,env.morgan.options));
-// console.log(app.locals)
+
 
 // setup the url encoded
 app.use(express.urlencoded());
