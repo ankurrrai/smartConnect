@@ -1,8 +1,8 @@
 const Comment=require('../models/comment');
 const Post=require('../models/post');
 const commentsMailer=require('../mailers/comments_mailer');
-const queue=require('../config/kue');
-const commentsWorker=require('../workers/comments_worker');
+// const queue=require('../config/kue');
+// const commentsWorker=require('../workers/comments_worker');
 
 const Like= require('../models/likes');
 
