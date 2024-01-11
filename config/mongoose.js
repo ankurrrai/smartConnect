@@ -8,7 +8,7 @@ main().catch(function(err){
 
 // coonect to db
 async function main (){
-    mongoose.connect(`${env.smartConnect_dbURL}/${env.smartConnect_dbName}`)
+    mongoose.connect(`${env.smartConnect_dbURL}`)
 }
 
 // accuire the db

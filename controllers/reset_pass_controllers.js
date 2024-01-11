@@ -2,9 +2,10 @@ const crypto=require('crypto');
 const AccessToken=require('../models/accesstoken');
 const User=require('../models/user');
 
-const queue=require('../config/kue');
-const resetPassWorker=require('../workers/reset_password_worker');
+// const queue=require('../config/kue');
+// const resetPassWorker=require('../workers/reset_password_worker');
 
+const resetPassMailer=require('../mailers/reset_password_mailers')
 
 module.exports.resetPage=function(req,res){
     return res.render('reset_user_form.ejs',{
@@ -22,12 +23,12 @@ module.exports.reset=async function(req,res){
                 isValid:true
             });
             accessToken=await AccessToken.findOne({accessToken:accessToken.accessToken}).populate('user');
+            resetPassMailer.resetPass(accessToken);
+            // let job=queue.create('resets',accessToken).save(function(err){
+            //     if (err){console.log('reset_password_controllers : Error in sending queue ',err);return;}
 
-            let job=queue.create('resets',accessToken).save(function(err){
-                if (err){console.log('reset_password_controllers : Error in sending queue ',err);return;}
-
-                 console.log('reset_password_controllers: job Enqueued - ',job.id)
-            })
+            //      console.log('reset_password_controllers: job Enqueued - ',job.id)
+            // })
             req.flash('success','Reset link shared to your email.')
             res.redirect('/')
 

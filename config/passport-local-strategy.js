@@ -16,7 +16,7 @@ passport.use(new LocalStaregy({
             if (!user || user.password!=password){
                 req.flash('error','Invalid username or password!')
                 return done(null,false);
-            };
+            };  
             return done(null,user);
 
         }).catch(function(err){
