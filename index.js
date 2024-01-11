@@ -86,7 +86,7 @@ app.use(session({
     },
     store:MongoStore.create(    
         {
-            mongoUrl:`${env.smartConnect_dbURL}/${env.smartConnect_dbName}` //have to read the documentation
+            mongoUrl:`${env.smartConnect_dbURL}` //have to read the documentation
         }
     )
 }));
